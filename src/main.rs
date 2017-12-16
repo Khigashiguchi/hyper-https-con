@@ -17,7 +17,7 @@ use std::env;
 
 fn main() {
     dotenv().ok();
-    let docbase_token = env::var("DOC_BASE_TOKEN").unwrap();
+    let docbase_token = env::var("DOCBASE_TOKEN").unwrap();
 
     let mut core = Core::new().unwrap();
     let handle = core.handle();
@@ -37,7 +37,8 @@ fn main() {
         println!("GET: {}", res.status());
         res.body().concat2().and_then(move |body| {
             let v: Value = serde_json::from_slice(&body).unwrap();
-            println!("Your team name is {}.", v[0]["domain"]);
+            env::set_var("DOCBASE_DOMAIN", v[0]["domain"].to_string());
+            println!("DOCBASE_DOMAIN {}", env::var("DOCBASE_DOMAIN").unwrap());
             Ok(())
         })
     });

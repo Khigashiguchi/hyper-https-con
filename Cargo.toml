@@ -1,6 +1,7 @@
 [package]
 name = "hyper_https"
 version = "0.1.0"
-authors = ["Kazuki Higashiguchi <k.higashiguchi@binc.jp>"]
+authors = ["Kazuki Higashiguchi <econoics0it0bem0116@gmail.com>"]
 
 [dependencies]
+hyper = "0.11"

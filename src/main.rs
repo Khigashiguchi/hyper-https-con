@@ -3,6 +3,7 @@ extern crate hyper_tls;
 extern crate tokio_core;
 extern crate futures;
 extern crate serde_json;
+extern crate dotenv;
 
 use futures::{Future, Stream};
 use hyper::Client;
@@ -11,9 +12,12 @@ use hyper::header::{ContentType};
 use hyper_tls::HttpsConnector;
 use tokio_core::reactor::Core;
 use serde_json::Value;
+use dotenv::dotenv;
+use std::env;
 
 fn main() {
-    let docbase_token = "";
+    dotenv().ok();
+    let docbase_token = env::var("DOC_BASE_TOKEN").unwrap();
 
     let mut core = Core::new().unwrap();
     let handle = core.handle();
